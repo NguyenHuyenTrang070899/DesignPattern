@@ -45,12 +45,10 @@ class Programmer {
     }
 }
 class CEO extends Observer {
-
     public CEO(Programmer programmer) {
         this.programmer = programmer;
         this.programmer.attach(this);
     }
-
     @Override
     public void update() {
         if(this.programmer.getState().equalsIgnoreCase("Thành công!!!")) {
@@ -61,12 +59,10 @@ class CEO extends Observer {
     }
 }
 class Manager extends Observer {
-
     public Manager(Programmer programmer) {
         this.programmer = programmer;
         this.programmer.attach(this);
     }
-
     @Override
     public void update() {
         if(this.programmer.getState().equalsIgnoreCase("Thành công!!!")) {
@@ -77,12 +73,10 @@ class Manager extends Observer {
     }
 }
 class LeadProgrammer extends Observer {
-
     public LeadProgrammer(Programmer programmer) {
         this.programmer = programmer;
         this.programmer.attach(this);
     }
-
     @Override
     public void update() {
         if(this.programmer.getState().equalsIgnoreCase("Thành công!!!")) {

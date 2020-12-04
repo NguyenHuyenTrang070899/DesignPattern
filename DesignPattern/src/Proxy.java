@@ -1,44 +1,41 @@
+//lazy load
 public class Proxy {
     public static void main(String[] args) {
-        MediaFile mediaFile = new ProxyMediaFile("dat.txt");
-        mediaFile.printName();
-        mediaFile.printName();
+        ProxyImage proxyImage = new ProxyImage("https://github.com/");
+        proxyImage.showImage();
+        proxyImage.showImage();
     }
 }
-interface MediaFile {
-    void printName();
+interface Image {
+    void showImage();
 }
-class MediaFileImpl implements MediaFile {
-    private String fileName;
+class RealImage implements Image {
+    private String url;
 
-    public MediaFileImpl(String fileName){
-        this.fileName = fileName;
-        loadFromDisk(fileName);
+    public RealImage(String url) {
+        this.url = url;
+        System.out.println("Image loaded");
+    }
+    @Override
+    public void showImage() {
+        System.out.println("Image showed");
+    }
+}
+class ProxyImage implements Image {
+    private Image realImage;
+    private String url;
+    public ProxyImage(String url) {
+        this.url = url;
+        System.out.println("Image unloaded: " + this.url);
     }
 
     @Override
-    public void printName() {
-        System.out.println("Tạm Ngưng " + fileName);
-    }
-
-    private void loadFromDisk(String fileName){
-        System.out.println("Đang tải " + fileName);
-    }
-}
-class ProxyMediaFile implements MediaFile {
-
-    private MediaFileImpl mediaFileImpl;
-    private String fileName;
-
-    public ProxyMediaFile(String fileName){
-        this.fileName = fileName;
-    }
-
-    @Override
-    public void printName() {
-        if(mediaFileImpl == null){
-            mediaFileImpl = new MediaFileImpl(fileName);
+    public void showImage() {
+        if (realImage == null) {
+            realImage = new RealImage(this.url);
+        } else {
+            System.out.println("Image already existed");
         }
-        mediaFileImpl.printName();
+        realImage.showImage();
     }
 }

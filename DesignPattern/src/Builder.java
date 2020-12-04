@@ -1,82 +1,47 @@
-public class Builder {
-    public static void main(String[] args) {
-        BankAccount newAccount = new BankAccount
-                .BankAccountBuilder("Nguyen Thi Huyen Trang", "0328360161")
-                .withEmail("trang12345.vn@gmail.com")
-                .wantNewsletter(true)
-                .wantMobileBanking(true)
-                .build();
-        System.out.println(newAccount);
-    }
-}
-
-class BankAccount {
-
-    private final String name; // required
-    private final String accountNumber; // required
+class SinhVien {
+    private final String name;
+    private final String mssv;
     private final String email;
-    private final boolean newsletter;
-    private final boolean mobileBanking;
-
-    public BankAccount(String name, String accountNumber, String email, boolean newsletter, boolean mobileBanking) {
+    private final String sex;
+    public SinhVien(String name, String mssv, String email, String sex) {
         super();
         this.name = name;
-        this.accountNumber = accountNumber;
+        this.mssv = mssv;
         this.email = email;
-        this.newsletter = newsletter;
-        this.mobileBanking = mobileBanking;
+        this.sex = sex;
     }
-
-    // Builder class
-    public static class BankAccountBuilder {
-
-        private String name; // required
-        private String accountNumber; // required
+    //class Builder
+    public static class SinhVienBuilder {
+        private String name;
+        private String mssv;
         private String email;
-        private boolean newsletter;
-        private boolean mobileBanking;
-
-        public BankAccountBuilder(String name, String accountNumber) {
+        private String sex;
+        public SinhVienBuilder(String name, String mssv) {
             this.name = name;
-            this.accountNumber = accountNumber;
+            this.mssv = mssv;
         }
-
-
-        public BankAccountBuilder withEmail(String email) {
+        public SinhVienBuilder getEmail(String email) {
             this.email = email;
             return this;
         }
-
-        public BankAccountBuilder wantNewsletter(boolean newsletter) {
-            this.newsletter = newsletter;
+        public SinhVienBuilder getSex(String sex) {
+            this.sex = sex;
             return this;
         }
-
-        public BankAccountBuilder wantMobileBanking(boolean mobileBanking) {
-            this.mobileBanking = mobileBanking;
-            return this;
-        }
-
-        public BankAccount build() {
-            validateUserObject();
-
-            BankAccount bankAccount = new BankAccount(this.name, this.accountNumber, this.email, this.newsletter, this.mobileBanking);
-
-            return bankAccount;
-        }
-
-        private void validateUserObject() {
-            // Do some basic validations to check
-            if (this.newsletter && email == null) {
-                throw new IllegalArgumentException("Email can't be null when client want to receive the new letter");
-            }
+        public SinhVien build() {
+            return new SinhVien(this.name, this.mssv, this.email, this.sex);
         }
     }
-
-    @Override
     public String toString() {
-        return "BankAccount [name=" + name + ", accountNumber=" + accountNumber + ", email="
-                + email + ", newsletter=" + newsletter + ", mobileBanking=" + mobileBanking + "]";
+        return "Sinh vien [name=" + name + ", mssv=" + mssv + ", email=" + email + ", sex=" + sex + "]";
     }
-
+}
+public class Builder {
+    public static void main(String args[]) {
+        SinhVien sv = new SinhVien
+                .SinhVienBuilder("Trang", "17020112")
+                .getSex("Male")
+                .build();
+        System.out.println(sv);
+    }
 }

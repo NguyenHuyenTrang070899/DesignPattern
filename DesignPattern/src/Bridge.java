@@ -1,58 +1,47 @@
 public class Bridge {
     public static void main(String[] args) {
-        Bank vietcomBank = new VietcomBank(new CheckingAccount());
-        vietcomBank.openAccount();
-        Bank tpBank = new TPBank(new SavingAccount());
-        tpBank.openAccount();
+        Abstract a1 = new Abstract1(new Implement1());
+        a1.A();
+        Abstract a2 = new Abstract2(new Implement2());
+        a2.A();
     }
 }
-interface Account {
-    void openAccount();
+interface Implement {
+    void A();
 }
-class CheckingAccount implements Account {
-
+class Implement1 implements Implement {
     @Override
-    public void openAccount() {
-        System.out.println("Checking Account");
+    public void A() {
     }
 }
-class SavingAccount implements Account {
-
+class Implement2 implements Implement {
     @Override
-    public void openAccount() {
-        System.out.println("Saving Account");
+    public void A() {
     }
 }
-abstract class Bank {
-
-    protected Account account;
-
-    public Bank(Account account) {
-        this.account = account;
+abstract class Abstract {
+    protected Implement implement;
+    public Abstract(Implement implement) {
+        this.implement = implement;
     }
-    public abstract void openAccount();
+    public abstract void A();
 }
-class VietcomBank extends Bank {
+class Abstract1 extends Abstract {
 
-    public VietcomBank(Account account) {
-        super(account);
+    public Abstract1(Implement implement) {
+        super(implement);
     }
-
     @Override
-    public void openAccount() {
-        System.out.print("Open your account at VietcomBank is a ");
-        account.openAccount();
+    public void A() {
+        implement.A();
     }
 }
-class TPBank extends Bank {
-
-    public TPBank(Account account) {
-        super(account);
+class Abstract2 extends Abstract {
+    public Abstract2(Implement implement) {
+        super(implement);
     }
-
     @Override
-    public void openAccount() {
-        System.out.print("Open your account at TPBank is a ");
-        account.openAccount();
+    public void A() {
+        implement.A();
     }
 }

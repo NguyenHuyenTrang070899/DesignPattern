@@ -1,47 +1,41 @@
-public class Prototype {
-    public static void main(String[] args) {
-        Computer computer1 = new Computer("Window 10", "Word 2016", "BKAV", "Chrome", "Skype");
-        Computer computer2 = computer1.clone();
-        computer2.setOthers("Skype, Teamviewer, FileZilla Client");
-
-        System.out.println(computer1);
-        System.out.println(computer2);
-    }
-}
-
-class Computer implements Cloneable {
-    private String os;
-    private String office;
-    private String antivirus;
-    private String browser;
+class User implements Cloneable {
+    private String name;
+    private String id;
+    private int age;
+    private String sex;
     private String others;
 
-    public Computer(String os, String office, String antivirus, String browser, String other) {
+    public User(String name, String id, int age, String sex, String others) {
         super();
-        this.os = os;
-        this.office = office;
-        this.antivirus = antivirus;
-        this.browser = browser;
-        this.others = other;
+        this.name = name;
+        this.id = id;
+        this.age = age;
+        this.sex = sex;
+        this.others = others;
     }
-
-    @Override
-    protected Computer clone() {
+    protected User clone() {
         try {
-            return (Computer) super.clone();
+            return (User) super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    @Override
     public String toString() {
-        return "Computer [os=" + os + ", office=" + office + ", antivirus=" + antivirus + ", browser=" + browser
-                + ", others=" + others + "]";
+        return "User [name= " + name + ", id= " + id + ", age= " + age + ", sex= " + sex + ", others= " + others + "]";
     }
 
     public void setOthers(String others) {
         this.others = others;
+    }
+}
+public class Prototype {
+    public static void main(String args[]) {
+        User user = new User("Trang", "17021075", 22, "Female", "level 1");
+        User user2 = user.clone();
+        user2.setOthers("level 1, 1m67");
+        System.out.println(user);
+        System.out.println(user2);
     }
 }

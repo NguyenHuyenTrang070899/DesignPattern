@@ -1,35 +1,22 @@
-public class Adapter {
-    public static void main(String[] args) {
-        VietnameseTarget client = new TranslatorAdapter(new EnglishAdaptee());
-        client.send("Xin chào");
+interface Target {
+    void A();
+}
+class Adaptee {
+    public void B() {
     }
 }
-interface VietnameseTarget {
-    void send(String words);
-}
-class EnglishAdaptee {
-    public void receive(String words) {
-        System.out.println("Retrieving words from Adapter ...");
-        System.out.println(words);
-    }
-}
-class TranslatorAdapter implements VietnameseTarget {
-    private EnglishAdaptee adaptee;
-    public TranslatorAdapter(EnglishAdaptee adaptee) {
+
+class TranslatorAdapter implements Target {
+    private Adaptee adaptee;
+    public TranslatorAdapter(Adaptee adaptee) {
         this.adaptee = adaptee;
     }
-
-    @Override
-    public void send(String words) {
-        System.out.println("Reading Words ...");
-        System.out.println(words);
-        String vietnameseWords = this.translate();
-        System.out.println("Sending Words ...");
-        adaptee.receive(vietnameseWords);
+    public void A() {
     }
-
-    private String translate() {
-        System.out.println("Translated!");
-        return "Hello";
+}
+public class Adapter {
+    public static void main(String[] args) {
+        Target client = new TranslatorAdapter(new Adaptee());
+        client.A();
     }
 }
