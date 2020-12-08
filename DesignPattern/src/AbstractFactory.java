@@ -35,8 +35,8 @@ enum FactoryType {
     FACTORY1, FACTORY2;
 }
 abstract class SuperAbstractFactory {
-    public abstract Chair method1();
-    public abstract Table method2();
+    public abstract Superclass1 method1();
+    public abstract Superclass2 method2();
 }
 class Factory1 extends SuperAbstractFactory {
     @Override
