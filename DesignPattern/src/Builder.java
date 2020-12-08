@@ -1,47 +1,41 @@
-class SinhVien {
-    private final String name;
-    private final String mssv;
-    private final String email;
-    private final String sex;
-    public SinhVien(String name, String mssv, String email, String sex) {
-        super();
-        this.name = name;
-        this.mssv = mssv;
-        this.email = email;
-        this.sex = sex;
+class Context {
+    private final String a;
+    private final String b;
+    private final String c;
+    private final String d;
+    public Context(String a, String b, String c, String d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
     }
-    //class Builder
-    public static class SinhVienBuilder {
-        private String name;
-        private String mssv;
-        private String email;
-        private String sex;
-        public SinhVienBuilder(String name, String mssv) {
-            this.name = name;
-            this.mssv = mssv;
+    public class ContextBuilder {
+        private String a;
+        private String b;
+        private String c;
+        private String d;
+        public ContextBuilder(String a, String b) {
+            this.a = a;
+            this.b = b;
         }
-        public SinhVienBuilder getEmail(String email) {
-            this.email = email;
+        public ContextBuilder getC(String c) {
+            this.c = c;
             return this;
         }
-        public SinhVienBuilder getSex(String sex) {
-            this.sex = sex;
+        public ContextBuilder getD(String d) {
+            this.d = d;
             return this;
         }
-        public SinhVien build() {
-            return new SinhVien(this.name, this.mssv, this.email, this.sex);
+        public Context build() {
+            return new Context(this.a, this.b, this.c, this.d);
         }
-    }
-    public String toString() {
-        return "Sinh vien [name=" + name + ", mssv=" + mssv + ", email=" + email + ", sex=" + sex + "]";
-    }
 }
 public class Builder {
     public static void main(String args[]) {
-        SinhVien sv = new SinhVien
-                .SinhVienBuilder("Trang", "17020112")
-                .getSex("Male")
-                .build();
-        System.out.println(sv);
+        Context c = new Context
+                    .ContextBuilder("a", "b");
+                    .getD("d");
+                    .build();
+        System.out.println(c);
     }
 }
