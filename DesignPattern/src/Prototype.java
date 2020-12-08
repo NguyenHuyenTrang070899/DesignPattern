@@ -1,41 +1,34 @@
-class User implements Cloneable {
-    private String name;
-    private String id;
-    private int age;
-    private String sex;
-    private String others;
+class A implements Cloneable {
+    private String a;
+    private String b;
+    private String c;
+    private String d;
 
-    public User(String name, String id, int age, String sex, String others) {
+    public A(String a, String b, String c, String d) {
         super();
-        this.name = name;
-        this.id = id;
-        this.age = age;
-        this.sex = sex;
-        this.others = others;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
     }
-    protected User clone() {
+    protected A clone() {
         try {
-            return (User) super.clone();
+            return (A) super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-    public String toString() {
-        return "User [name= " + name + ", id= " + id + ", age= " + age + ", sex= " + sex + ", others= " + others + "]";
-    }
-
-    public void setOthers(String others) {
-        this.others = others;
+    public void setOthers(String d) {
+        this.d = d;
     }
 }
 public class Prototype {
     public static void main(String args[]) {
-        User user = new User("Trang", "17021075", 22, "Female", "level 1");
-        User user2 = user.clone();
-        user2.setOthers("level 1, 1m67");
-        System.out.println(user);
-        System.out.println(user2);
+        A a = new A("Trang", "17021075", "Female", "level 1");
+        A a2 = a.clone();
+        a2.setOthers("level 1, 1m67");
+        System.out.println(a);
+        System.out.println(a2);
     }
 }
