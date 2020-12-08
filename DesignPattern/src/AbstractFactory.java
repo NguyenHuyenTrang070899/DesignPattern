@@ -1,97 +1,74 @@
 public class AbstractFactory {
     public static void main(String[] args) {
-
-        FurnitureAbstractFactory factory = FurnitureFactory.getFactory(MaterialType.FLASTIC);
-
-        Chair chair = factory.createChair();
-        chair.create(); // Create plastic chair
-
-        Table table = factory.createTable();
-        table.create(); // Create plastic table
+        SuperAbstractFactory f = SupewrFactory.getFactory(FactoryType.FACTORY1);
+        Superclass1 s1 = f,method1();
+        s1.A();
     }
 }
-
-interface Chair {
-    void create();
+interface Superclass1 {
+    void A();
 }
-class PlasticChair implements Chair {
+class Subclass1 implements Superclass1 {
     @Override
-    public void create() {
-        System.out.println("Create plastic chair");
+    public void A() {
     }
 }
-class WoodChair implements Chair {
+class Subclass2 implements Superclass1 {
     @Override
-    public void create() {
-        System.out.println("Create wood chair");
+    public void A() {
     }
 }
-interface Table {
-    void create();
+interface Superclass2 {
+    void B();
 }
-class PlasticTable implements Table {
+class Subclass3 implements Superclass2 {
     @Override
-    public void create() {
-        System.out.println("Create plastic table");
+    public void B() {
     }
 }
-class WoodTable implements Table {
+class Subclass4 implements Superclass2 {
     @Override
-    public void create() {
-        System.out.println("Create wood table");
+    public void B() {
     }
 }
-enum MaterialType {
-    FLASTIC, WOOD
+enum FactoryType {
+    FACTORY1, FACTORY2;
 }
-
-abstract class FurnitureAbstractFactory {
-
-    public abstract Chair createChair();
-
-    public abstract Table createTable();
-
+abstract class SuperAbstractFactory {
+    public abstract Chair method1();
+    public abstract Table method2();
 }
-
-class FlasticFactory extends FurnitureAbstractFactory {
-
+class Factory1 extends SuperAbstractFactory {
     @Override
-    public Chair createChair() {
-        return new PlasticChair();
+    public Superclass1 method1() {
+        return new Subclass1();
     }
-
     @Override
-    public Table createTable() {
-        return new PlasticTable();
-    }
-
-}
-class WoodFactory extends FurnitureAbstractFactory {
-
-    @Override
-    public Chair createChair() {
-        return new WoodChair();
-    }
-
-    @Override
-    public Table createTable() {
-        return new WoodTable();
+    public Superclass2 method2() {
+        return new Subclass3();
     }
 }
-
-class FurnitureFactory {
-
-    private FurnitureFactory() {
-
+class Factory2 extends SuperAbstractFactory {
+    @Override
+    public Superclass1 method1() {
+        return new Subclass2();
     }
-    public static FurnitureAbstractFactory getFactory(MaterialType materialType) {
-        switch (materialType) {
-            case FLASTIC:
-                return new FlasticFactory();
-            case WOOD:
-                return new WoodFactory();
+    @Override
+    public Superclass2 method2() {
+        return new Subclass4();
+    }
+}
+class SuperFactory {
+    private SuperFactory() {
+    }
+    public static SuperAbstractFactory getFactory(FactoryType type) {
+        switch (type) {
+            case FACTORY1:
+                return new Factory1();
+            case FACTORY2:
+                return new Factory2();
             default:
-                throw new UnsupportedOperationException("This furniture is unsupported ");
+                throw new UnsupportedOperationException();
         }
     }
 }
