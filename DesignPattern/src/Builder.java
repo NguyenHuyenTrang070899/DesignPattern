@@ -9,7 +9,7 @@ class Context {
         this.c = c;
         this.d = d;
     }
-    public class ContextBuilder {
+    public static class ContextBuilder {
         private String a;
         private String b;
         private String c;
@@ -29,12 +29,13 @@ class Context {
         public Context build() {
             return new Context(this.a, this.b, this.c, this.d);
         }
+    }
 }
 public class Builder {
     public static void main(String args[]) {
         Context c = new Context
-                    .ContextBuilder("a", "b");
-                    .getD("d");
+                    .ContextBuilder("a", "b")
+                    .getD("d")
                     .build();
         System.out.println(c);
     }
